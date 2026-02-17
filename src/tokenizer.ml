@@ -288,14 +288,8 @@ let rec match_line ~t ~grammar ~stack ~pos ~toks ~line rem_pats =
             d.delim_patterns
         | While ->
           (* Subsume the remainder of the line into a span *)
-          ( remove_empties
-              ({
-                 scopes =
-                   add_scopes scopes [ d.delim_name; d.delim_content_name ];
-                 ending = len;
-               }
-              :: toks),
-            se :: stack )))
+          match_line ~t ~grammar ~stack:(se :: stack) ~pos:end_ ~toks ~line
+            d.delim_patterns))
     | Include_scope name :: pats -> (
       match find_by_scope_name t name with
       | None ->
