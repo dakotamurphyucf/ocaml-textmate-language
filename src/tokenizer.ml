@@ -91,7 +91,8 @@ let subst_backrefs stack_top =
 let match_subst se =
   match
     Oniguruma.create (subst_backrefs se) Oniguruma.Options.none
-      Oniguruma.Encoding.utf8 Oniguruma.Syntax.default
+      Oniguruma.Encoding.utf8
+      (Oniguruma.Syntax.default ())
   with
   | Error e -> error ("End pattern: " ^ se.stack_delim.delim_end ^ ": " ^ e)
   | Ok re -> re
