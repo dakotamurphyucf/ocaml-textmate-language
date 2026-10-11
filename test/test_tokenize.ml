@@ -47,11 +47,12 @@ let () =
           [ { line = "a"; expected = [ (1, [ "begin"; "source.while" ]) ] } ];
           [
             {
+              (* The fork tokenizes inner patterns on the begin line too. *)
               line = "ac";
               expected =
                 [
                   (1, [ "begin"; "source.while" ]);
-                  (2, [ "expression.group"; "source.while" ]);
+                  (2, [ "keyword.letter"; "expression.group"; "source.while" ]);
                 ];
             };
             {

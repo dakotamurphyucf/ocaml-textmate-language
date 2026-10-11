@@ -20,7 +20,7 @@ let get_list f = function
 let compile_regex re =
   match
     Oniguruma.create re Oniguruma.Options.none Oniguruma.Encoding.utf8
-      Oniguruma.Syntax.default
+      (Oniguruma.Syntax.default ())
   with
   | Error msg -> error (re ^ ": " ^ msg)
   | Ok re -> re
